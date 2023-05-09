@@ -1,2 +1,20 @@
 comando para crear una aplicacion de react : npx create-react-app nombre-app
 
+
+jsx = JavaScript + xml, es decir que cuando creamos un elemento xml en JavaScript no tenemos que poner comillas
+ej: const h1Html = <h1> HOLA MUNDO </h1>
+
+Para poder utilizar jsx debemos importar react en el scope donde se utilice, #import React from 'react';
+
+para poder renderizar debemos en primer lugar importar el reactdom, #import ReactDOM from 'react-dom/client';
+
+luego debemos utilizar el metodo createroot y le pasamos el valor de donde se va a renderizar, ej: el div o el container donde se va a poner
+y luego .render() y ahi debemos pasarle que vamos a renderizar.
+
+# const saludo = <h1> hola mundo </h1>
+# const divHtml = document.queryselector('#root'); //aqui hacemos referencia a un objeto en el html con id root;
+
+ReactDOM.createRoot( divHtml ).render( saludo );
+
+
+

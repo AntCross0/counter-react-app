@@ -1,10 +1,15 @@
 comando para crear una aplicacion de react : npx create-react-app nombre-app
+=================================================================================>
+### QUE ES JSX
 
 
 jsx = JavaScript + xml, es decir que cuando creamos un elemento xml en JavaScript no tenemos que poner comillas
 ej: const h1Html = <h1> HOLA MUNDO </h1>
 
 Para poder utilizar jsx debemos importar react en el scope donde se utilice, #import React from 'react';
+
+=================================================================================>
+### RENDERIZAR UN ELEMENTO EN REACT
 
 para poder renderizar debemos en primer lugar importar el reactdom, #import ReactDOM from 'react-dom/client';
 
@@ -15,6 +20,167 @@ y luego .render() y ahi debemos pasarle que vamos a renderizar.
 # const divHtml = document.queryselector('#root'); //aqui hacemos referencia a un objeto en el html con id root;
 
 ReactDOM.createRoot( divHtml ).render( saludo );
+
+=================================================================================>
+### COMPONENTES
+
+
+# en react los componentes se recomiendan crearlos con CAMEL CASE;
+
+existen 2 tipos de components en react, los que estan hechos a vace de funciones Functionals FC y los que estan a base de clases SFC
+mayormente se utilizan los FC.
+
+un componente no es mas que una funcion pero para llamarlo lo hacemos como una etiqueta de html, por ej:
+
+<MiComponente />
+
+NOTA: Se suele dejar un espacio para determinar que es un componente
+=================================================================================>
+
+### RETORNAR VARIOS ELEMENTOS EN UN COMPONENTE
+
+en React podemos retornar varios elementos a la vez en un componente colocando entre parentesis los elementos, pero debe estar dentro de un elemento padre por ej:
+
+return ( 
+    <div> 
+        <h1> hola mundo </h1>
+        <p>Mi primera aplicacion </p>
+    </div>
+);
+
+este codigo no tienen ningun problema, pero debemos tener en cuenta que se agregara el div padre que le estamos pasando, puede ser que esto no lo necesitemos, en caso de que no podemos hacer lo siguiente:
+
+para no tener un div vacio, importamos Fragment de react, este componente nos va permitir retornar varios elementos: 
+
+return <Fragment>
+    <h1> hola mundo </h1>
+    <p>Mi primera aplicacion </p>
+</Fragment>;
+
+si por otro lado no queremos hacer la importacion de Fragment ni utilizar un div padre vacio, entonces colocamos una etiqueta vacia y funciona igual:
+
+return <>
+    <h1> hola mundo </h1>
+    <p>Mi primera aplicacion </p>
+</>;
+
+=================================================================================>
+
+### imprimir variables
+
+para imprimir variables debe verlo como un objeto valido para reactChild, no funcionara si ponemos directo en el codigo jsx una variable
+para imprimirla debemos ponerlo entre llaves: 
+
+<h1> Hola { name }</h1>
+
+strings = se imprimen normal.
+int = se imprimen normal.
+floats = se imprime normal.
+arrays = se imprimen pero recorre el array y los imprime todos juntos, ej: array = [1,2,3,4,5] resultado: 12345
+
+objetos = no podemos imprimir objetos directamente, para ello tenemos varias maneras
+
+### IMPRIMIR OBJETOS CON JSON.STRINGIFY
+
+con el json STRINGIFY, convertimos el objeto en un string
+
+const persona = {
+    'name' : 'Anthony',
+    'age'  : 64
+}
+
+return <h1> { JSON.stringify( persona ) }</h1>
+
+//tendriamos un resultado como: {"name":"Anthony","age":64}
+
+
+### IMPRIMIR OBJETOS CON LA ETIQUTA PRE Y STRINGIFY
+
+podemos utilizar la etiqueta <pre></pre> seguido del json.stringify
+
+return <pre> { JSON.stringify( persona ) }</pre>
+
+//tendriamos un resultado parecido al de JSON.stringify
+
+### IMPRIMIR OBJETOS CON JSON.STRINGIFY 2
+para que salga con espacios podemos pasarle algunos parametros al JSON.STRINGIFY
+de segundo parametro le pasamos un null
+y de ultimo parametro le pasamos la cantidad de separacion
+
+return <h1> { JSON.stringify( persona, null, 3 ) }</h1>
+
+//tendriamos algo como esto: 
+{
+   "name": "Anthony",
+   "age": 64
+}
+
+Nota: dentro de estas llaves podemos hacer cualquier operacion que retorne un valor
+
+=================================================================================>
+
+### PROPS DE LOS COMPONENETS
+
+podemos ponerle propiedades ( parametros ) a nuestros componentes, una forma antigua es:
+hay que tener en cuenta que las props si no tienen nada retornan un objeto vacio, pero no undefined
+
+NOTA: Los elementos undefined no se imprimen en react
+
+const MiComponente =  ( props ) => {
+    //code
+}
+
+para enviar valores a este props se hace desde el elemento padre, es decir donde lo llamemos:
+
+<MiComponente saludo="hola mundo" />
+
+*pero actualmente o es una buena practica usar la desestructuracion de elemento para crear los props y asi solamente pedir lo que necesitamos
+
+const MiComponente = ( { saludo }) => {
+    //code
+}
+
+para crear un valor por defecto:
+
+const MiComponente = ( { saludo='My Default Value' }) => {
+    //code
+}
+
+=================================================================================>
+
+### DEFINIR PROPS OBLIGATORIOS Y SU TIPO
+
+para definir prop obligatorios y su tipo de data, debemos importar proptypes
+#import PropTypes from 'prop-types'
+
+suponiendo que tenemos el componente: MiComponente
+
+para definir los proptypes se hace despues de la declaracion del componente colocando lo siguiente:
+//recordar en miniscula proptypes
+
+MiComponente.proptypes = { }
+
+dentro de estas llaves debemos poner primero el nombre del prop que queremos indicarle, seguido del tipo y si es required or not
+//NOTA ES MiComponente.prototypes
+MiComponente.prototypes = {
+    nombre : Proptypes.string.isRequired,
+}
+
+### VALORES POR DEFECTO DE LOS PROPS (OTRA FORMA)
+si necesitamos que  cuando tengamos un prop no obligatorio, que tenga un valor por defecto y este valor por defecto lo tome como argumento, despues de declarar nuestro componente podemos hacer lo siguiente: 
+
+PrimeraApp.defaultProps = {
+    saludo: 'algo vacio'
+}
+
+de esta manera el prop saludo tomara el string 'algo vacio' cuando no reciba ningun otro valor
+
+
+=================================================================================>
+
+
+
+
 
 
 

@@ -18,7 +18,7 @@ const persona = {
     
 }
 
-PrimeraApp.prototypes = {
+PrimeraApp.propTypes = {
     nombre: PropTypes.string.isRequired
 };
 

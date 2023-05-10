@@ -7,7 +7,7 @@ import './index.css';
 
 const divRoot = document.querySelector('#root');
 
-ReactDOM.createRoot( divRoot ).render( <CounterApp numero='123' />  );
+ReactDOM.createRoot( divRoot ).render( <CounterApp numero={1} />  );
 
 
 

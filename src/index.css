@@ -5,3 +5,11 @@ html,body {
     font-size: 1.3rem;
     padding: 7rem;
 }
+
+button {
+    background-color: deepskyblue;
+    color: white;
+    padding: 1.3rem;
+    font-size: 1.8rem;
+    margin: 1rem;
+}

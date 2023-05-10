@@ -1,22 +1,36 @@
-import React from 'react';
+import React,{ useState} from 'react';
 import PropTypes from 'prop-types';
 
-const handleAdd = (e)=> {
-    console.log(e);
-}
+const CounterApp = ( { numero = 10 }) => {
 
-const CounterApp = ( { numero }) => {
+    const [ counter, setCounter ] = useState( numero );
 
+    const handleAdd = ( ) => {   
+        setCounter( counter + 1 );
+    }
+
+    const handleSubstract = () => {
+        setCounter( counter - 1);
+    }
+
+    const handleReset = () => {
+        setCounter( numero );
+    }
+    
     return <>
         <h1>Counter App</h1>
-        <h2> { numero }</h2>
+        <h2> { counter }</h2>
+        <button onClick={  handleAdd  }>Aumentar +1 </button>
+        <button onClick={  handleSubstract  }>Restar -1 </button>
+        <button onClick={  handleReset  }>Reset </button>
     </>
 
 }
 
-CounterApp.prototypes = {
+CounterApp.propTypes = {
     numero : PropTypes.number.isRequired
 }
+
 
 
 export default CounterApp;

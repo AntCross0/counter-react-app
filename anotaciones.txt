@@ -161,8 +161,8 @@ para definir los proptypes se hace despues de la declaracion del componente colo
 MiComponente.proptypes = { }
 
 dentro de estas llaves debemos poner primero el nombre del prop que queremos indicarle, seguido del tipo y si es required or not
-//NOTA ES MiComponente.prototypes
-MiComponente.prototypes = {
+//NOTA ES MiComponente.proptypes
+MiComponente.proptypes = {
     nombre : Proptypes.string.isRequired,
 }
 
@@ -177,6 +177,68 @@ de esta manera el prop saludo tomara el string 'algo vacio' cuando no reciba nin
 
 
 =================================================================================>
+
+### MANEJO DE EVENTOS EN REACT
+
+para manejar eventos de los componentes debemos buscar el tipo de evento que queramos aplicarle, se llama en la etiqueta del elemento que estemos construyendo:
+
+<button onClick = { ( event ) => { lo que queremos que retorne o haga } }
+NOTA: el parametro event retorna literalmente el evento, es decir no es el parametro, el parametro lo importamos en la funcion que estemos realizando
+
+suponiendo que tenemos el parametro `numero` y queremos incrementar su valor cada vez que le demos click y mostrar por consola;
+let numero = 1;
+
+<button onClick= { () => { console.log( numero++ ) } }> Aumentar </button>
+
+Podemos simplificar este codigo en caso de que necesitaramos imprimir el evento
+como aqui se mostrara que el unico argumento es el evento, y es el primer y unico argumento que estamos pasando podemos obviar los parentesis:
+
+de esto:
+const MostrarEvento = (e) => {
+    console.log( e );
+}
+
+<button onClick= { ( e ) => { MostrarEvento( e ) } }> Aumentar </button>
+
+a esto:
+
+<button onClick= { MostrarEvento } > Aumentar </button>
+
+=================================================================================>
+
+### LOS HOOKS EN REACT
+
+Los hooks son funciones que manejan el estado de un elemento.
+
+### HOOK useState
+
+Para trabajar con este Hook, debemos importarlo de react;
+ import { useState } from 'react';
+
+el useState debe estar dentro de un Functional Component ( un componente a base de funciones ) o un Hook Personalizado para que pueda funcionar.
+
+el useState se declara con un arreglo, en el que el primer valor sera el valor que queremos manejar, mientras que el segundo valor sera una funcion la cual va a indicar cuando elemento va a cambiar su estado, luego lo igualamos a useState() y dentro de los parentesis ponemos el tipo de valor por defecto o el tipo de dato.
+
+const [nombre, setState] = useState('Goku');
+
+para poder mutar el nombre, debemos obligatoriamente usar el setState, podemos hacer un retorno tanto como una operacion en la misma linea, como retornar una funcion que devuelva el nuevo valor que tendra `nombre`.
+
+
+aqui estamos utilizando una funcion para retornar el nuevo valor de nombre;
+setNombre( ( nombre ) => { 
+        nombre = 'Manuel'; 
+        return nombre;
+    }
+);
+
+tambien podriamos perfectamente indicarle el valor directamente sin hacer funciones como:
+//aqui lo aceptara porque el tipo de dato de `Nombre` es un string y el set esta retornando un string.
+setNombre ( 'Lopez' ); 
+
+podemos realizar ciertas operaciones logicas aqui dentro, pero no igualar el nombre, no podemos asignarle un valor fuera de una funcion de set al argumento.
+
+setNombre( nombre + 'Mi apellido' );
+
 
 
 
